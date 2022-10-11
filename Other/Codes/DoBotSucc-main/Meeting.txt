@@ -1,0 +1,18 @@
+/*
+
+Information from Meeting with Gavin 21/04/2022
+
+Simulation:
+Robot will pick up lego blocks being fed on a conveyor belt platform and place them in respected containers. User has the option
+through GUI to choose a certain type of block (e.g. red only) in which DoBot robot will ignore other conditions (other coloured blocks) and focus on
+goal.
+
+Physical:
+Robot will be using RGB depth Real sense camera to configure DoBot Robot to pick up blocks (lego)
+and place them into allocated containers.
+
+Additional Notes:
+- must use rmic to stack lego blocks at the end
+-visual servoing, constantly re computing each frame velocity
+-collision avoidance. add something big to convayer, detect when collided with robot; stop system
+*/
