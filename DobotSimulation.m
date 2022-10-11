@@ -7,6 +7,9 @@ name = 'Dobot';
 workspace = [-1 1 -1 1 -1 1];
 scale = 0.5;
 
+rosinit;
+% rosshutdown;
+
 %% Modelling Robot
 L1 = Link('d', 0.103, 'a', 0, 'alpha', pi/2, 'qlim', deg2rad([-135 135]));
 L2 = Link('d', 0, 'a', 0.140, 'alpha', -pi, 'qlim', deg2rad([5 80]));
@@ -18,3 +21,14 @@ Dobot = SerialLink([L1 L2 L3 L5], 'name', name);
 q = zeros(1,4);
 Dobot.plot(q,'workspace', workspace, 'scale', scale)
 Dobot.teach;
+
+%% ROS stuff
+find(cell2mat(strfind(rosmsg('list'),'dobot')),1)
+
+
+
+
+
+
+
+
