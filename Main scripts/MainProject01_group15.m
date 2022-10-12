@@ -1,4 +1,5 @@
 % Group 15 Project - Control and Grasping for DoBot Robot
+% roscore
 % roslaunch dobot_magician_driver dobot_magician.launch
 % https://github.com/gapaul/dobot_magician_driver/wiki/MATLAB-Example
 
