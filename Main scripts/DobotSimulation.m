@@ -8,6 +8,7 @@ name = 'Dobot';
 workspace = [-10 10 -10 10 -1 1];
 scale = 0.5;
 rosinit;
+DobotMagician();
 
 %% Modelling Robot
 L1 = Link('d', 0.103, 'a', 0, 'alpha', pi/2, 'qlim', deg2rad([-135 135]));
