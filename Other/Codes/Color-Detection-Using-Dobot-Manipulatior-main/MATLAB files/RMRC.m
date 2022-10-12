@@ -13,7 +13,7 @@ qHome = qHomeModel;
 base = transl(0, 0, 0.138);
 % 
 % % Display the robot
-dobot = Dobot2(base, qHome);
+dobot = Dobot(base, qHome);
 hold on;
 
 t = 10;                             % Total time

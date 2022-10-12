@@ -6,7 +6,7 @@ qHomeModel = [qHomeReal(1) qHomeReal(2) (pi/2)-qHomeReal(2)+qHomeReal(3) (pi/2)-
 qHome = qHomeModel;
 base = transl(0, 0, 1.05);
 
-dobot = Dobot2(base, qHome);
+dobot = Dobot(base, qHome);
 hold on;
 %% Set up for environment
 locationRedTray = [0.05 0.25 0.91];
