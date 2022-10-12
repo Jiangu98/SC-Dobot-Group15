@@ -1,9 +1,10 @@
 %Simple script to quickly demo use of CalCamArm.m
+clc; clf; clear all;
 
 %path to images of checkerboards
-imageFolder = './Example Data/Images/';
+imageFolder = ('./Camera-to-Arm-Calibration-master/Example Data/Images/');
 %loading arm transformations
-load('./Example Data/armMat.mat');
+load('armMat.mat');
 %checkerboard square widths in mm
 squareSize = 13.6;
 

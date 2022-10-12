@@ -173,8 +173,8 @@ depth = mean(Points(3,:)); %mean Z axis
 
 % Display DObot
 Tc = dobot.model.fkine(q) * trotx(pi);
-dobot.model.animate(qq);
-drawnow
+% dobot.model.animate(qq);
+% drawnow
 
 % plot camera
 cam.T = Tc;

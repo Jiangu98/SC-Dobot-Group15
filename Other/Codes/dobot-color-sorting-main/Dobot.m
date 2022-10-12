@@ -40,6 +40,7 @@ classdef Dobot < handle
             %             L5 = Link('d',0,'a',0,'alpha',0,'offset',0, 'qlim', deg2rad([-85 85]));
             
             self.model = SerialLink([L1 L2 L3 L4],'name',name);
+            self.model.teach;
             
         end
         %% PlotAndColourRobot

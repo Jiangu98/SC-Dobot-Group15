@@ -1,9 +1,10 @@
 %Simple script to quickly demo use of CalCamArm.m
-
+clc; clf; clear all;
 %path to images of checkerboards
-imageFolder = './Example Data/Images/Calibration';
+imageFolder = ('./Hand-Eye-Calibration-Matlab-master/examples/calib1211/Images');
 %loading arm transformations
-load('./Example Data/Calibration_21-Apr-2016 17:22:35.mat');
+% load('./Example Data/Calibration_21-Apr-2016 17:22:35.mat');
+load('./Hand-Eye-Calibration-Matlab-master/examples/calib1211/Poses');
 %checkerboard square widths in mm
 squareSize = 27.5;
 %run calibration
