@@ -71,7 +71,7 @@ toolStateMsg.Data = [0]; % Send 1 for on and 0 for off
 send(toolStatePub,toolStateMsg);
 
 %% Set target joint state
-jointTarget = [0.2,0.4,-0.3,0]; % Remember that the Dobot has 4 joints by default.
+jointTarget = [0.2,0.4,1,0]; % Remember that the Dobot has 4 joints by default.
 
 [targetJointTrajPub,targetJointTrajMsg] = rospublisher('/dobot_magician/target_joint_states');
 trajectoryPoint = rosmessage("trajectory_msgs/JointTrajectoryPoint");
