@@ -1,5 +1,6 @@
 % Group 15 Project - Control and Grasping for DoBot Robot
 % roscore
+% cd /usr/local/MATLAB/R2020a/bin 
 % roslaunch dobot_magician_driver dobot_magician.launch
 % https://github.com/gapaul/dobot_magician_driver/wiki/MATLAB-Example
 
