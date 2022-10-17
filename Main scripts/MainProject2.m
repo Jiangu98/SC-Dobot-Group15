@@ -69,7 +69,35 @@ targetEndEffectorMsg.Position.Z = endEffectorPosition(3);
 
 send(targetEndEffectorPub,targetEndEffectorMsg);
 
+%% rosbag camera images. use this or section above for image capture
+% 
+% % 1. bagpath = what('Bags') <-- Use this in cmd window to find directory for next step
+% % 2. cd liam/405C-0F7C/SnC/SC-Dobot-Group15/Main\ scripts/Bags/ <--replace 
+% % 3. rostopic list -v 
+% % 4. rosbag record -O Projectrosbag1.bag /camera/color/image_raw --duration=5
+% 
+wherepath = what('DobotCameraImgs');  %find folder path 
+saveimgpath = wherepath.path;
+i=0;
 
+bagname = 'Projectrosbag1.bag';
+bag = rosbag(bagname)
+selection = select(bag, 'Topic', '/camera/color/image_raw') 
+message_structs = readMessages(selection, 30);
+msg = message_structs{1};
+rgb_image = readImage(msg);
+figure(1);
+imshow(rgb_image)
+pause(1);
+figure(2);
+% bagGrayimg = rgb2gray(rgb_image);
+% imshow(bagGrayimg) 
+for i = 0
+    file_name = sprintf('bagimg%d.png', i);
+    fullFileName = fullfile(saveimgpath, file_name);
+    imgName = [saveimgpath,'/bagimg_',num2str(i),'.png'];
+    imwrite(rgb_image,imgName);
+end
 
 
 

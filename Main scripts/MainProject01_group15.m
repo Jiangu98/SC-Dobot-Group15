@@ -27,6 +27,36 @@ rosinit;                    % If driver is on your laptop
 name = 'Dobot';
 pause(1);
 
+%% rosbag camera images. use this or section above for image capture
+% 
+% % 1. bagpath = what('Bags') <-- Use this in cmd window to find directory for next step
+% % 2. cd liam/405C-0F7C/SnC/SC-Dobot-Group15/Main\ scripts/Bags/ <--replace 
+% % 3. rostopic list -v 
+% % 4. rosbag record -O Projectrosbag1.bag usb_cam/image_raw --duration=5
+% 
+% wherepath = what('DobotCameraImgs');  %find folder path 
+% saveimgpath = wherepath.path;
+% i=0;
+% 
+% bagname = 'Projectrosbag1.bag';
+% bag = rosbag(bagname)
+% selection = select(bag, 'Topic', 'usb_cam/image_raw')  %change this to camera when in labs
+% message_structs = readMessages(selection, 30);
+% msg = message_structs{1};
+% rgb_image = readImage(msg);
+% figure(1);
+% imshow(rgb_image)
+% pause(1);
+% figure(2);
+% bagGrayimg = rgb2gray(rgb_image);
+% imshow(bagGrayimg) 
+% for i = 0
+%     file_name = sprintf('bagimg%d.png', i);
+%     fullFileName = fullfile(saveimgpath, file_name);
+%     imgName = [saveimgpath,'/bagimg_',num2str(i),'.png'];
+%     imwrite(bagGrayimg,imgName);
+% end
+
 %% Check Safety Status of Robot
 % safetyStatusSubscriber = rossubscriber('/dobot_magician/safety_status');
 % pause(2); %Allow some time for MATLAB to start the subscriber
@@ -102,56 +132,28 @@ send(targetEndEffectorPub,targetEndEffectorMsg);
 
 %% Take Photos from Camera. This uses usb_cam. change the subscriber line for Lab Camera
 % rostopic list
-i = 0;
-wherepath = what('DobotCameraImgs');  %find folder path 
-saveimgpath = wherepath.path;
-rgbSub = rossubscriber('/camera/color/image_raw');           % subscribe to usb_cam raw image. Change whatever is in brackets to directory found through rostopic list
-pause(2);
-
-for i=0:5;
-    
-    figure(2);
-    imgIn = rgbSub.LatestMessage;
-    raw_img = readImage(imgIn);
-    file_name = sprintf('test%d.png', i);
-    fullFileName = fullfile(saveimgpath, file_name);
-    imgName = [saveimgpath,'/test_',num2str(i),'.png'];
-    grayImg = rgb2gray(raw_img);                % convert rgb to gray
-    imwrite(raw_img,imgName);                   % save image to folder
-    imshow(grayImg)                             % show image 
-    fprintf("test image %d saved \n",i)
-    pause(1);
-end
-% 
-%% rosbag camera images. use this or section above for image capture
-% 
-% % 1. bagpath = what('Bags') <-- Use this in cmd window to find directory for next step
-% % 2. cd liam/405C-0F7C/SnC/SC-Dobot-Group15/Main\ scripts/Bags/ <--replace 
-% % 3. rostopic list -v 
-% % 4. rosbag record -O Projectrosbag1.bag usb_cam/image_raw --duration=5
-% 
+% i = 0;
 % wherepath = what('DobotCameraImgs');  %find folder path 
 % saveimgpath = wherepath.path;
-% i=0;
+% rgbSub = rossubscriber('/camera/color/image_raw');           % subscribe to usb_cam raw image. Change whatever is in brackets to directory found through rostopic list
+% pause(2);
 % 
-% bagname = 'Projectrosbag1.bag';
-% bag = rosbag(bagname)
-% selection = select(bag, 'Topic', 'usb_cam/image_raw')  %change this to camera when in labs
-% message_structs = readMessages(selection, 30);
-% msg = message_structs{1};
-% rgb_image = readImage(msg);
-% figure(1);
-% imshow(rgb_image)
-% pause(1);
-% figure(2);
-% bagGrayimg = rgb2gray(rgb_image);
-% imshow(bagGrayimg) 
-% for i = 0
-%     file_name = sprintf('bagimg%d.png', i);
+% for i=0:5;
+%     
+%     figure(2);
+%     imgIn = rgbSub.LatestMessage;
+%     raw_img = readImage(imgIn);
+%     file_name = sprintf('test%d.png', i);
 %     fullFileName = fullfile(saveimgpath, file_name);
-%     imgName = [saveimgpath,'/bagimg_',num2str(i),'.png'];
-%     imwrite(bagGrayimg,imgName);
+%     imgName = [saveimgpath,'/test_',num2str(i),'.png'];
+%     grayImg = rgb2gray(raw_img);                % convert rgb to gray
+%     imwrite(raw_img,imgName);                   % save image to folder
+%     imshow(grayImg)                             % show image 
+%     fprintf("test image %d saved \n",i)
+%     pause(1);
 % end
+
+
 
 
 
