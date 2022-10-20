@@ -10,22 +10,70 @@ rgbSub = rossubscriber('/camera/color/image_raw');           % subscribe to usb_
 % rgbSub = rossubscriber('/usb_cam/image_raw');
 pause(2);
 
-%% Take photo
+% %% Take photo
+% figure(2);
+% imgIn = rgbSub.LatestMessage;
+% im = readImage(imgIn);
+% image_h = imshow(readImage(rgbSub.LatestMessage)); 
+% file_name = sprintf('test%d.png', i);
+% fullFileName = fullfile(saveimgpath, file_name);
+% imgName = [saveimgpath,'/test_',num2str(i),'.png'];
+% fprintf("test image %d saved \n",i)
+% pause(1);
+
 figure(2);
 imgIn = rgbSub.LatestMessage;
 im = readImage(imgIn);
-file_name = sprintf('test%d.png', i);
-fullFileName = fullfile(saveimgpath, file_name);
-imgName = [saveimgpath,'/test_',num2str(i),'.png'];
-fprintf("test image %d saved \n",i)
-pause(1);
+image_h = imshow(readImage(rgbSub.LatestMessage)); 
+
+tic 
+while 1  
+% % Get and Update Images   
+    figure(2);
+    imgIn = rgbSub.LatestMessage;
+    im = readImage(imgIn);
+    image_h = imshow(readImage(rgbSub.LatestMessage)); 
+    image_h.CData = readImage(rgbSub.LatestMessage);
+    drawnow;
+    
+    
+    
 %% Detect specific color
+
+color = 0; %red=1; green=2; blue=3;
 
 R = im(:,:,1) > 55;
 G = im(:,:,2) < 35;
 B = im(:,:,3) < 35;
-
 RedPixels = R & G & B;
+
+R = im(:,:,1) < 35;
+G = im(:,:,2) > 55;
+B = im(:,:,3) < 35;
+GreenPixels = R & G & B;
+
+R = im(:,:,1) < 35;
+G = im(:,:,2) < 35;
+B = im(:,:,3) > 55;
+BluePixels = R & G & B;
+
+
+AreaRed = sum(RedPixels(:) == 1);
+AreaGreen = sum(GreenPixels(:) == 1);
+AreaBlue = sum(BluePixels(:) == 1);
+
+
+if((AreaRed>AreaGreen) && (AreaRed>AreaBlue))                         %if the area of Red is greater than Green and Blue then its Red
+    color=1
+ elseif((AreaGreen>AreaRed) && (AreaGreen>AreaBlue))                    %if the area of Green is greater than Red and Blue then its Green
+    color=2
+ elseif((AreaBlue>AreaRed) && (AreaBlue>AreaGreen))                    %if the area of Blue is greater than red and Green then its Blue
+    color=3                  
+ else
+    color=0
+end  
+
+
 
 subplot(2,3,2);
 imshow(R);
@@ -36,6 +84,8 @@ title('Red');
 subplot(2,1,2);
 imshow(im);
 title('im'); 
+
+
 %% Get location of white area
 
 % I1 = convertRGBtoGS(RedPixels); 
@@ -60,16 +110,22 @@ plot(objectX,objectY,'.b')
 
 
 % Get the size of the input image
-[rows, cols, channels] = size(im)
+[rows, cols, channels] = size(im);
 
 imgX = cols/2;
 imgY = rows/2;
 
-difX = -(imgX - objectX)
-difY = imgY - objectY
+difX = -(imgX - objectX);
+difY = imgY - objectY;
 
 hold on
 plot(imgX,imgY,'.y')
+
+
+toc; 
+
+end 
+
 
 
 
@@ -78,7 +134,7 @@ plot(imgX,imgY,'.y')
 function [imgGS] = convertRGBtoGS(imgRGB)
 
 % Get the size of the input image
-[rows, cols, channels] = size(imgRGB)
+[rows, cols, channels] = size(imgRGB);
 
 % Create an empty matrix for the new greyscale image
 imgGS = zeros(rows,cols);
