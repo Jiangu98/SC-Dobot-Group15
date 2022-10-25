@@ -1,8 +1,0 @@
-*.DS_Store
-*.asv
-*.bag
-*.jpeg
-*.mat
-!scene_detector.mat
-!shape_detector.mat
-
