@@ -1,7 +1,7 @@
 function ColorPointTest()
 close all;
-rgbSub = rossubscriber('/camera/rgb/image_color');
-pointsSub = rossubscriber('/camera/depth/points');
+rgbSub = rossubscriber('/camera/color/image_raw');
+pointsSub = rossubscriber('/camera/depth/image_rect_raw/theora');
 pause(5); 
 
 % Get the first message and plot the non coloured data
