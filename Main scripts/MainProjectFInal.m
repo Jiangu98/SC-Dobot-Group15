@@ -219,7 +219,7 @@ pause(2);
 function [imgGS] = convertRGBtoGS(imgRGB)
 
 % Get the size of the input image
-[rows, cols, channels] = size(imgRGB);
+[rows, cols, ~] = size(imgRGB);
 
 % Create an empty matrix for the new greyscale image
 imgGS = zeros(rows,cols);
@@ -240,7 +240,7 @@ end
 function [imgBW] = convertGStoBW(imgGS, threshold)
 
 % Get the size of the input image
-[rows, cols, channels] = size(imgGS);
+[rows, cols, ~] = size(imgGS);
 
 %create an empty matrix for the binary image
 imgBW = zeros(rows,cols);
